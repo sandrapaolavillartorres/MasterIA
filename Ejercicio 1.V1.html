@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Practica las Tablas de Multiplicar</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background-color: #f0f8ff;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      color: #ff6347;
+    }
+    .exercise {
+      background-color: #fff8dc;
+      border: 4px dashed #ffa07a;
+      padding: 30px;
+      margin: 20px auto;
+      width: 300px;
+      border-radius: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    .character {
+      font-size: 60px;
+    }
+    input[type="number"] {
+      font-size: 20px;
+      padding: 5px;
+      margin-top: 10px;
+      width: 80px;
+    }
+    button {
+      font-size: 18px;
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #ffb347;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #ffa07a;
+    }
+    .feedback {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>✨ Practica las Tablas de Multiplicar ✨</h1>
+  <div class="exercise">
+    <div class="character" id="character">😊</div>
+    <p id="question">¿Cuánto es 2 x 3?</p>
+    <input type="number" id="answer" />
+    <br />
+    <button onclick="checkAnswer()">Comprobar</button>
+    <div class="feedback" id="feedback"></div>
+  </div>
+
+  <script>
+    const characters = ['🐶', '🐱', '🦁', '🐻', '🐼', '🐨', '🐯', '🐵', '🐒', '🐮'];
+    let num1, num2;
+
+    function generateQuestion() {
+      num1 = Math.floor(Math.random() * 10) + 1;
+      num2 = Math.floor(Math.random() * 10) + 1;
+      document.getElementById('question').textContent = `¿Cuánto es ${num1} x ${num2}?`;
+      document.getElementById('feedback').textContent = '';
+      document.getElementById('answer').value = '';
+      const randomCharacter = characters[Math.floor(Math.random() * characters.length)];
+      document.getElementById('character').textContent = randomCharacter;
+    }
+
+    function checkAnswer() {
+      const userAnswer = parseInt(document.getElementById('answer').value);
+      const correctAnswer = num1 * num2;
+      const feedback = document.getElementById('feedback');
+
+      if (userAnswer === correctAnswer) {
+        feedback.textContent = '¡Correcto! 🎉';
+        feedback.style.color = 'green';
+      } else {
+        feedback.textContent = `¡Ups! La respuesta correcta era ${correctAnswer}`;
+        feedback.style.color = 'red';
+      }
+      setTimeout(generateQuestion, 2000);
+    }
+
+    generateQuestion();
+  </script>
+</body>
+</html>
